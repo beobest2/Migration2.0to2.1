@@ -13,8 +13,10 @@ def migration_sys_table_location(path):
     data = []
     for base, dirs, files in os.walk(path):
         for _file in files:
+            is_fine = True
             if ".DAT" in _file.upper() and ("T" in _file.upper() or "SYS" in _file.upper()): 
                 file_path = base + '/' + _file
+
                 try:
                     bd = Backend([file_path])
                     conn = bd.GetConnection()
@@ -22,13 +24,13 @@ def migration_sys_table_location(path):
                     cursor.execute("select * from sys_table_location")
                     data = cursor.fetchall()
                 except:
-                    pass
+                    is_fine = False
                 finally:
                     try:
                         conn.close()
                     except:
                         pass
-                if len(data) > 0:
+                if is_fine:
                     new_dir = make_new_dir(base, _file)
                     if new_dir:
                         print new_dir
