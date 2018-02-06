@@ -168,7 +168,6 @@ try:
         DSK_OPTION       TEXT,
         SQL_SCRIPT       TEXT,
         TABLE_REALNAME   TEXT,
-        DB_REALNAME      TEXT,
         DB_NAME          TEXT,
         DB_REALNAME      TEXT
     );
